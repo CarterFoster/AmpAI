@@ -1,0 +1,37 @@
+Ampify 🎸
+
+AI-powered guitar amp setting recommender
+
+Overview
+
+Ampify is an AI application that takes in a song input (audio snippet, chords, or metadata) and outputs recommended guitar amp settings (amp model, gain, EQ, reverb, presence, effects). It’s designed to help guitarists quickly dial in tones that match the feel of a song without endless tweaking.
+
+The system uses a FastAPI backend with audio analysis (via librosa) and optional ML models (PyTorch). A React + Tailwind frontend provides an upload form, visual knob controls, and preset management.
+
+This project is structured for rapid prototyping — start with the rule-based MVP, then layer in machine learning models and cloud deployment.
+
+Features
+
+🎵 Input options: upload an audio clip, enter chords/genre, or provide song title/artist
+
+🎛 Output: JSON with amp model + normalized knob values (gain, bass, mid, treble, presence, reverb)
+
+🤖 AI core: rule-based predictor (MVP) + hooks for PyTorch models
+
+🧑‍💻 Feedback loop: collect user ratings to refine future predictions
+
+☁️ Deploy-ready: Dockerized backend, frontend deployable on Vercel/Netlify, backend on Render/Cloud Run
+
+🔗 Extensible: support for exporting presets to popular amp sims (planned)
+
+Tech Stack
+
+Frontend: React + TypeScript + TailwindCSS
+
+Backend: FastAPI (Python), librosa, optional PyTorch
+
+Storage: S3 (or any object store), Postgres (Supabase recommended)
+
+Infra: Docker, GitHub Actions (CI/CD), Vercel/Render/Cloud Run
+
+Optional: Redis for job queueing, Hugging Face/Replicate for GPU inference
