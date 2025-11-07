@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guitar Amp UI</title>
+    <style>
+      body {
+        background: radial-gradient(circle at center, #1e1e1e 0%, #0d0d0d 100%);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        height: 100vh;
+        color: #f0f0f0;
+      }
+
+      header {
+        width: 100%;
+        height: 60px;
+      }
+
+      .search-area {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .search-bar {
+        display: flex;
+        align-items: center;
+        background: #222;
+        border-radius: 30px;
+        border: 1px solid #555;
+        overflow: hidden;
+        width: 420px;
+        box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.05);
+      }
+
+      .search-bar input {
+        border: none;
+        outline: none;
+        padding: 10px 15px;
+        flex: 1;
+        font-size: 16px;
+        color: white;
+        background: transparent;
+      }
+
+      .search-bar button {
+        background: #111;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background 0.2s;
+      }
+
+      .search-bar button:hover {
+        background: #333;
+      }
+
+      .make-amp-btn {
+        background: linear-gradient(145deg, #1b1b1b, #2e2e2e);
+        color: #f0f0f0;
+        border: 1px solid #555;
+        border-radius: 25px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 15px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+        transition: all 0.2s ease-in-out;
+      }
+
+      .make-amp-btn:hover {
+        background: linear-gradient(145deg, #333, #1a1a1a);
+        transform: translateY(-2px);
+      }
+
+      .controls {
+        background: linear-gradient(145deg, #181818, #222);
+        border: 2px solid #333;
+        border-radius: 20px;
+        box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05),
+          0 10px 30px rgba(0, 0, 0, 0.6);
+        padding: 50px;
+        margin-top: 60px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 80px;
+        justify-items: center;
+      }
+
+      .knob {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        user-select: none;
+      }
+
+      .dial {
+        width: 110px;
+        height: 110px;
+        background: radial-gradient(circle at 30% 30%, #333 0%, #111 70%);
+        border-radius: 50%;
+        position: relative;
+        box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.05),
+          0 5px 15px rgba(0, 0, 0, 0.8);
+        cursor: pointer;
+        border: 2px solid #444;
+      }
+
+      .pointer {
+        position: absolute;
+        top: 12%;
+        left: 48%;
+        width: 4%;
+        height: 40%;
+        background: linear-gradient(to bottom, #ffcc00, #ffaa00);
+        border-radius: 2px;
+        transform-origin: bottom center;
+        transform: rotate(0deg);
+        box-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
+        transition: transform 0.05s linear;
+      }
+
+      .knob label {
+        margin-top: 18px;
+        font-size: 18px;
+        color: #f5f5f5;
+        letter-spacing: 1px;
+      }
+
+      .knob-value {
+        font-size: 14px;
+        color: #aaa;
+        margin-top: 6px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header></header>
+
+    <div class="search-area">
+      <div class="search-bar">
+        <input type="text" placeholder="Search Song" />
+        <button>Search</button>
+      </div>
+      <button class="make-amp-btn">Make Amp</button>
+    </div>
+
+    <section class="controls">
+      <div class="knob">
+        <div class="dial"><div class="pointer"></div></div>
+        <label>Gain</label>
+        <div class="knob-value">50</div>
+      </div>
+      <div class="knob">
+        <div class="dial"><div class="pointer"></div></div>
+        <label>Volume</label>
+        <div class="knob-value">50</div>
+      </div>
+      <div class="knob">
+        <div class="dial"><div class="pointer"></div></div>
+        <label>Bass</label>
+        <div class="knob-value">50</div>
+      </div>
+
+      <div class="knob">
+        <div class="dial"><div class="pointer"></div></div>
+        <label>Treble</label>
+        <div class="knob-value">50</div>
+      </div>
+      <div class="knob">
+        <div class="dial"><div class="pointer"></div></div>
+        <label>Presence</label>
+        <div class="knob-value">50</div>
+      </div>
+      <div class="knob">
+        <div class="dial"><div class="pointer"></div></div>
+        <label>Master</label>
+        <div class="knob-value">50</div>
+      </div>
+    </section>
+
+    <script src="amp-control.js"></script>
+    <script src="search-save.js"></script>
+  </body>
+</html>
