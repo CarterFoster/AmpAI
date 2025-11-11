@@ -1,5 +1,5 @@
-
-    let lastSearch = "";
+(function() {
+  let lastSearch = "";
   const searchInput = document.querySelector(".search-bar input");
   const searchButton = document.querySelector(".search-bar button");
 
@@ -10,6 +10,7 @@
       alert(`Saved "${lastSearch}"`);
     }
   });
+})();
 
 
 
