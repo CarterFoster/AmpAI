@@ -1,17 +1,13 @@
-// make-amp.js (Fixed - no conflicts)
+// make-amp.js (Updated for Spotify integration)
 (function() {
   const makeAmpBtn = document.querySelector(".make-amp-btn");
-  const searchInput = document.querySelector(".search-bar input");
   const knobs = document.querySelectorAll(".knob");
 
-  // Backend URL - update this to your actual backend URL
+  // Backend URL
   const BACKEND_URL = "http://localhost:8000";
 
   console.log("🚀 make-amp.js loaded!");
   console.log("📍 Backend URL:", BACKEND_URL);
-  console.log("🔘 Found button:", makeAmpBtn);
-  console.log("🔍 Found search input:", searchInput);
-  console.log("🎛️ Found knobs:", knobs.length);
 
   // Function to update a specific knob value
   function updateKnob(knobLabel, value) {
@@ -22,10 +18,7 @@
         const pointer = knob.querySelector(".pointer");
         const valueDisplay = knob.querySelector(".knob-value");
         
-        // Clamp value between 0 and 100
         const clampedValue = Math.min(100, Math.max(0, value));
-        
-        // Calculate rotation angle
         const angle = (clampedValue - 50) * 2.7;
         pointer.style.transform = `rotate(${angle}deg)`;
         valueDisplay.textContent = Math.round(clampedValue);
@@ -37,7 +30,6 @@
   // Function to apply all amp settings
   function applyAmpSettings(settings) {
     console.log("🎛️ Applying settings:", settings);
-    // Map settings to knobs
     if (settings.gain !== undefined) updateKnob("Gain", settings.gain);
     if (settings.volume !== undefined) updateKnob("Volume", settings.volume);
     if (settings.bass !== undefined) updateKnob("Bass", settings.bass);
@@ -66,29 +58,24 @@
   async function makeAmp() {
     console.log("🎸 Make Amp button clicked!");
     
-    const searchQuery = searchInput.value.trim();
-    console.log("🔍 Search query:", searchQuery);
+    // Get selected Spotify song from spotify-search.js
+    const selectedSong = window.getSelectedSpotifySong && window.getSelectedSpotifySong();
     
-    if (!searchQuery) {
-      console.warn("⚠️ No search query entered");
-      alert("Please enter a song name first!");
+    if (!selectedSong) {
+      alert("Please search for and select a song from Spotify first!");
       return;
     }
+
+    console.log("🎵 Selected song data:", selectedSong);
 
     setLoadingState(true);
 
     try {
-      // Parse the search query (assuming format: "song - artist" or just "song")
-      const parts = searchQuery.split("-").map(s => s.trim());
-      const songName = parts[0];
-      const artist = parts.length > 1 ? parts[1] : "";
-      
-      console.log("🎵 Song:", songName);
-      console.log("🎤 Artist:", artist);
-
       const requestBody = {
-        song_name: songName,
-        artist: artist,
+        song_name: selectedSong.name,
+        artist: selectedSong.artist,
+        album: selectedSong.album,
+        spotify_id: selectedSong.spotifyId,
         desired_tone: "authentic to the original recording"
       };
       
@@ -119,7 +106,6 @@
       // Apply the settings to the knobs
       if (data.settings) {
         applyAmpSettings(data.settings);
-        alert(`Amp settings generated for "${searchQuery}"!`);
       } else {
         console.error("❌ No settings in response");
         throw new Error("No settings received from server");
@@ -137,14 +123,6 @@
   // Add click event listener to Make Amp button
   console.log("🔗 Adding click listener to button");
   makeAmpBtn.addEventListener("click", makeAmp);
-
-  // Optional: Allow Enter key in search bar to trigger Make Amp
-  searchInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      console.log("⌨️ Enter key pressed");
-      makeAmp();
-    }
-  });
 
   console.log("✅ make-amp.js fully initialized!");
 })();

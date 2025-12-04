@@ -27,6 +27,12 @@
         align-items: center;
         gap: 10px;
         margin-top: 20px;
+        position: relative;
+      }
+
+      .search-container {
+        position: relative;
+        width: 420px;
       }
 
       .search-bar {
@@ -36,7 +42,7 @@
         border-radius: 30px;
         border: 1px solid #555;
         overflow: hidden;
-        width: 420px;
+        width: 100%;
         box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.05);
       }
 
@@ -58,10 +64,111 @@
         cursor: pointer;
         font-size: 16px;
         transition: background 0.2s;
+        display: none; /* Hide the search button since we'll use autocomplete */
       }
 
       .search-bar button:hover {
         background: #333;
+      }
+
+      /* Autocomplete Dropdown */
+      .autocomplete-dropdown {
+        position: absolute;
+        top: calc(100% + 5px);
+        left: 0;
+        width: 100%;
+        background: #2a2a2a;
+        border: 1px solid #555;
+        border-radius: 15px;
+        max-height: 320px;
+        overflow-y: auto;
+        display: none;
+        z-index: 1000;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+      }
+
+      .autocomplete-dropdown.show {
+        display: block;
+      }
+
+      .autocomplete-item {
+        padding: 12px 15px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: background 0.2s;
+        border-bottom: 1px solid #3a3a3a;
+      }
+
+      .autocomplete-item:first-child {
+        border-radius: 15px 15px 0 0;
+      }
+
+      .autocomplete-item:last-child {
+        border-bottom: none;
+        border-radius: 0 0 15px 15px;
+      }
+
+      .autocomplete-item:hover {
+        background: #3a3a3a;
+      }
+
+      .autocomplete-item.selected {
+        background: #4a4a4a;
+      }
+
+      .autocomplete-item img {
+        width: 45px;
+        height: 45px;
+        border-radius: 4px;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+
+      .autocomplete-item-info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .autocomplete-item-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 3px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .autocomplete-item-details {
+        font-size: 12px;
+        color: #aaa;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .autocomplete-loading {
+        padding: 15px;
+        text-align: center;
+        color: #aaa;
+        font-size: 14px;
+      }
+
+      .autocomplete-no-results {
+        padding: 15px;
+        text-align: center;
+        color: #aaa;
+        font-size: 14px;
+      }
+
+      .selected-song-info {
+        font-size: 12px;
+        color: #1db954;
+        margin-top: 5px;
+        text-align: center;
+        min-height: 16px;
       }
 
       .make-amp-btn {
@@ -80,6 +187,12 @@
       .make-amp-btn:hover {
         background: linear-gradient(145deg, #333, #1a1a1a);
         transform: translateY(-2px);
+      }
+
+      .make-amp-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
       }
 
       .controls {
@@ -141,6 +254,25 @@
         color: #aaa;
         margin-top: 6px;
       }
+
+      /* Scrollbar styling */
+      .autocomplete-dropdown::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .autocomplete-dropdown::-webkit-scrollbar-track {
+        background: #1a1a1a;
+        border-radius: 10px;
+      }
+
+      .autocomplete-dropdown::-webkit-scrollbar-thumb {
+        background: #555;
+        border-radius: 10px;
+      }
+
+      .autocomplete-dropdown::-webkit-scrollbar-thumb:hover {
+        background: #666;
+      }
     </style>
   </head>
 
@@ -148,10 +280,14 @@
     <header></header>
 
     <div class="search-area">
-      <div class="search-bar">
-        <input type="text" placeholder="Search Song" />
-        <button>Search</button>
+      <div class="search-container">
+        <div class="search-bar">
+          <input type="text" placeholder="Search for a song..." />
+          <button>Search</button>
+        </div>
+        <div class="autocomplete-dropdown"></div>
       </div>
+      <div class="selected-song-info"></div>
       <button class="make-amp-btn">Make Amp</button>
     </div>
 
@@ -190,7 +326,7 @@
     </section>
 
     <script src="amp-control.js"></script>
-    <script src="search-save.js"></script>
+    <script src="spotify-search.js"></script>
     <script src="make-amp.js"></script>
   </body>
 </html>
