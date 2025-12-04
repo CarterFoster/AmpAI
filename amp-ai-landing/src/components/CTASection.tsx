@@ -4,7 +4,7 @@ import { Guitar } from "lucide-react";
 export function CTASection() {
   const handleFindTone = () => {
     // This would navigate to the main tone finding tool
-    console.log("Navigate to tone finder");
+    window.location.href = "https://ampaidummyfrontend-rk2ltjugs-goldseeker99s-projects.vercel.app/front_end/hcl_frontEnd.html";
   };
 
   return (
