@@ -93,7 +93,7 @@
   
   // ===== UI FUNCTIONS =====
   function showLoading() {
-    dropdown.innerHTML = '<div class="autocomplete-loading">🔍 Searching Spotify...</div>';
+    dropdown.innerHTML = '<div class="autocomplete-loading"> Searching...</div>';
     dropdown.classList.add('show');
   }
   
