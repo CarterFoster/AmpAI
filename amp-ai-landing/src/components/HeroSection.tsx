@@ -3,9 +3,9 @@ import { Sparkles } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 export function HeroSection() {
+  // Navigate to the front-end application
   const handleFindTone = () => {
-    // This would navigate to the main tone finding tool
-    console.log("Navigate to tone finder");
+    window.location.href = "https://ampaidummyfrontend-rk2ltjugs-goldseeker99s-projects.vercel.app/front_end/hcl_frontEnd.html";
   };
 
   return (
@@ -40,7 +40,7 @@ export function HeroSection() {
 
           {/* Subheadline */}
           <p className="text-zinc-300 max-w-2xl mx-auto">
-            Stop tweaking endlessly. Just tell AMP.ai what song you want to play, and get the exact amp settings to nail that iconic tone instantly.
+            Get the perfect tone for any song in seconds with AMP.ai's advanced algorithm.
           </p>
 
           {/* CTA Button */}

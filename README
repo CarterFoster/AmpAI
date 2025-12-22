@@ -12,17 +12,17 @@ This project is structured for rapid prototyping — start with the rule-based M
 
 Features
 
-🎵 Input options: upload an audio clip, enter chords/genre, or provide song title/artist
+Input options:  provide song title/artist
 
-🎛 Output: JSON with amp model + normalized knob values (gain, bass, mid, treble, presence, reverb)
+Output: JSON with amp model + normalized knob values (gain, bass, mid, treble, presence, reverb)
+ 
+ AI core: rule-based predictor (MVP) + hooks for PyTorch models
 
-🤖 AI core: rule-based predictor (MVP) + hooks for PyTorch models
+ Feedback loop: collect user ratings to refine future predictions
 
-🧑‍💻 Feedback loop: collect user ratings to refine future predictions
+Deploy-ready: Dockerized backend, frontend deployable on Vercel/Netlify, backend on Render/Cloud Run
 
-☁️ Deploy-ready: Dockerized backend, frontend deployable on Vercel/Netlify, backend on Render/Cloud Run
-
-🔗 Extensible: support for exporting presets to popular amp sims (planned)
+Extensible: support for exporting presets to popular amp sims (planned)
 
 Tech Stack
 
@@ -35,3 +35,20 @@ Storage: S3 (or any object store), Postgres (Supabase recommended)
 Infra: Docker, GitHub Actions (CI/CD), Vercel/Render/Cloud Run
 
 Optional: Redis for job queueing, Hugging Face/Replicate for GPU inference
+
+Video link: https://youtu.be/GyBEt7Db5io
+
+Setup insructions:
+1. download repository
+2. Go to backend of project (cd tone-ai-backend)
+3. install requirements (pip install -r requirements.txt)
+4. Start Backend (uvicorn app:app --reload)
+5. Go to frontend of project( cd front_end)
+6. Install npm (npm install)
+7. Run front end (npm run dev)
+8. Input any song and click "make amp"
+
+Authors: Carter Foster, Daniel Robinson
+
+Contribution Summary: For the CS 2104 project, both carter and I worked on the same overarching process. To stay in the requirements for the project, we worked on different parts. The files for my project are in "front_end" and "tone-ai-backend" any other files are not part of my project.
+
