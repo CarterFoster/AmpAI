@@ -42,6 +42,11 @@ app.add_middleware(
 
 print("CORS middleware added")
 
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("app:app", host="0.0.0.0", port=8000)
+
+
 # Create OpenAI client
 try:
     client = OpenAI(api_key=api_key)
