@@ -1,7 +1,7 @@
 // spotify-search.js
 (function() {
   // ===== CONFIGURATION =====
-  // Replace these with your Spotify API credentials
+
   const SPOTIFY_CLIENT_ID = '775006113d30428d8270b1303dc32206';
   const SPOTIFY_CLIENT_SECRET = '64dabc0523d84f48a1ac84f672ac1d51';
   
