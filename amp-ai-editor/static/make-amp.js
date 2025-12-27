@@ -4,11 +4,10 @@
   const knobs = document.querySelectorAll(".knob");
 
   // Backend URL
-  const BACKEND_URL = "http://localhost:8000";
+  const BACKEND_URL = "";
 
   console.log("🚀 make-amp.js loaded!");
-  console.log("📍 Backend URL:", BACKEND_URL);
-
+  
   // Function to update a specific knob value
   function updateKnob(knobLabel, value) {
     console.log(`🎚️ Updating ${knobLabel} to ${value}`);
@@ -83,7 +82,7 @@
       console.log("📦 Request body:", requestBody);
 
       // Make request to backend
-      const response = await fetch(`${BACKEND_URL}/get_amp_settings`, {
+      const response = await fetch(`/get_amp_settings`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
