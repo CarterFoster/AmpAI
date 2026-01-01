@@ -1,12 +1,48 @@
-// make-amp.js (Updated for Spotify integration)
 (function() {
   const makeAmpBtn = document.querySelector(".make-amp-btn");
   const knobs = document.querySelectorAll(".knob");
 
-  // Backend URL
-  const BACKEND_URL = "";
-
-  console.log("🚀 make-amp.js loaded!");
+  console.log("🚀 make-amp.js loaded (protected version)!");
+  
+  // Check authentication on page load
+  const token = localStorage.getItem('ampai_token');
+  const user = JSON.parse(localStorage.getItem('ampai_user') || '{}');
+  
+  if (!token) {
+    console.log('⚠️ No auth token found, redirecting to login...');
+    window.location.href = '/login';
+    return;
+  }
+  
+  console.log('✅ User authenticated:', user.email);
+  
+  // Add logout button
+  const header = document.querySelector('header');
+  if (header && user.email) {
+    header.innerHTML = `
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; background: rgba(0,0,0,0.2);">
+        <div style="color: #f0f0f0; font-size: 14px;">
+          Welcome, ${user.name || user.email}
+        </div>
+        <button id="logout-btn" style="
+          background: rgba(255,255,255,0.1);
+          border: 1px solid rgba(255,255,255,0.3);
+          color: #f0f0f0;
+          padding: 8px 16px;
+          border-radius: 6px;
+          cursor: pointer;
+          font-size: 14px;
+          transition: all 0.2s;
+        ">Logout</button>
+      </div>
+    `;
+    
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      localStorage.removeItem('ampai_token');
+      localStorage.removeItem('ampai_user');
+      window.location.href = '/';
+    });
+  }
   
   // Function to update a specific knob value
   function updateKnob(knobLabel, value) {
@@ -78,20 +114,29 @@
         desired_tone: "authentic to the original recording"
       };
       
-      console.log("📤 Sending request to:", `${BACKEND_URL}/get_amp_settings`);
+      console.log("📤 Sending authenticated request to:", `/api/get_amp_settings`);
       console.log("📦 Request body:", requestBody);
 
-      // Make request to backend
-      const response = await fetch(`/get_amp_settings`, {
+      // Make request to backend WITH AUTH TOKEN
+      const response = await fetch(`/api/get_amp_settings`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}` // Add auth token
         },
         body: JSON.stringify(requestBody),
       });
 
       console.log("📥 Response status:", response.status);
-      console.log("📥 Response OK:", response.ok);
+
+      if (response.status === 401) {
+        // Token expired or invalid
+        alert("Session expired. Please login again.");
+        localStorage.removeItem('ampai_token');
+        localStorage.removeItem('ampai_user');
+        window.location.href = '/login';
+        return;
+      }
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -112,8 +157,7 @@
 
     } catch (error) {
       console.error("❌ Error:", error);
-      console.error("❌ Error stack:", error.stack);
-      alert(`Failed to generate amp settings: ${error.message}\n\nMake sure your backend is running on ${BACKEND_URL}`);
+      alert(`Failed to generate amp settings: ${error.message}`);
     } finally {
       setLoadingState(false);
     }
@@ -123,5 +167,5 @@
   console.log("🔗 Adding click listener to button");
   makeAmpBtn.addEventListener("click", makeAmp);
 
-  console.log("✅ make-amp.js fully initialized!");
+  console.log("✅ make-amp.js fully initialized with authentication!");
 })();
