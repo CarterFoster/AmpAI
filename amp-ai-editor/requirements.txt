@@ -2,9 +2,10 @@ fastapi
 uvicorn[standard]
 openai
 python-dotenv
-pydantic
+pydantic[email]
 boto3
 PyJWT
 passlib[bcrypt]
 python-multipart
 httpx
+email-validator
