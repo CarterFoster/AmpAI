@@ -169,13 +169,13 @@ def landing_page():
         return FileResponse(landing_path)
     return {"message": "Landing page not found"}
 
-# @application.get("/login")
-# def login_page():
-#     """Login page - public"""
-#     login_path = os.path.join("static", "login", "index.html")
-#     if os.path.exists(login_path):
-#         return FileResponse(login_path)
-#     return {"message": "Login page not found"}
+@application.get("/saved")
+def saved_page():
+     """Saved page - public"""
+     saved_path = os.path.join("static", "saved", "index.html")
+     if os.path.exists(saved_path):
+         return FileResponse(saved_path)
+     return {"message": "saved page not found"}
 
 @application.get("/app")
 def app_page():
