@@ -134,7 +134,7 @@
         alert("Session expired. Please login again.");
         localStorage.removeItem('ampai_token');
         localStorage.removeItem('ampai_user');
-        window.location.href = '/login';
+        window.location.href = '/';
         return;
       }
 
