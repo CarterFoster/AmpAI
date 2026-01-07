@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMP.ai - My Presets</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #1a1a1a;
+      color: #e4e4e7;
+    }
+
+    /* Header */
+    .header {
+      background-color: #0f0f0f;
+      border-bottom: 1px solid #2a2a2a;
+      padding: 1rem 2rem;
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #f59e0b;
+      font-weight: 600;
+      font-size: 1.25rem;
+    }
+
+    .logo svg {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      background-color: #0f0f0f;
+      border-bottom: 1px solid #2a2a2a;
+      padding: 1rem 2rem;
+    }
+
+    .top-bar-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .tab {
+      padding: 0.5rem 0;
+      color: #71717a;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+
+    .tab:hover {
+      color: #a1a1aa;
+    }
+
+    .tab.active {
+      color: #e4e4e7;
+      border-bottom-color: #f59e0b;
+    }
+
+    .create-btn {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #000;
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.375rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+
+    .create-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    }
+
+    /* Main Content */
+    .main-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* Presets Grid */
+    .presets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .preset-card {
+      background-color: #0f0f0f;
+      border: 1px solid #2a2a2a;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preset-card:hover {
+      border-color: #f59e0b;
+      transform: translateY(-2px);
+    }
+
+    .preset-icon {
+      width: 4rem;
+      height: 4rem;
+      margin-bottom: 1rem;
+      color: #71717a;
+    }
+
+    .preset-name {
+      color: #e4e4e7;
+      font-weight: 500;
+      text-align: center;
+      margin-bottom: 0.25rem;
+      font-size: 0.875rem;
+    }
+
+    .preset-details {
+      color: #71717a;
+      font-size: 0.75rem;
+      text-align: center;
+    }
+
+    /* Search Bar */
+    .search-container {
+      position: sticky;
+      bottom: 2rem;
+      max-width: 600px;
+      margin: 2rem auto 0;
+    }
+
+    .search-wrapper {
+      position: relative;
+      background-color: #0f0f0f;
+      border: 1px solid #2a2a2a;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .search-wrapper:focus-within {
+      border-color: #f59e0b;
+    }
+
+    .search-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+      color: #71717a;
+    }
+
+    .search-input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      color: #e4e4e7;
+      font-size: 0.875rem;
+    }
+
+    .search-input::placeholder {
+      color: #71717a;
+    }
+
+    .go-btn {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #000;
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.375rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+
+    .go-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .empty-state svg {
+      width: 5rem;
+      height: 5rem;
+      color: #3f3f46;
+      margin-bottom: 1rem;
+    }
+
+    .empty-state h2 {
+      color: #e4e4e7;
+      margin-bottom: 0.5rem;
+    }
+
+    .empty-state p {
+      color: #71717a;
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m11.9 12.1 4.514-4.514M20.1 2.3a1 1 0 0 0-1.4 0l-1.114 1.114A2 2 0 0 0 17 4.828v1.344a2 2 0 0 1-.586 1.414A2 2 0 0 1 17.828 7h1.344a2 2 0 0 0 1.414-.586L21.7 5.3a1 1 0 0 0 0-1.4zM6 16l2 2M8.2 9.9C8.7 8.8 9.8 8 11 8c2.8 0 5 2.2 5 5 0 1.2-.8 2.3-1.9 2.8l-.9.4A2 2 0 0 0 12 18a4 4 0 0 1-4 4c-3.3 0-6-2.7-6-6a4 4 0 0 1 4-4 2 2 0 0 0 1.8-1.2z"/>
+          <circle cx="11.5" cy="12.5" r=".5" fill="currentColor"/>
+        </svg>
+        <span>AMP.ai</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Top Bar with Tabs -->
+  <div class="top-bar">
+    <div class="top-bar-content">
+      <div class="tabs">
+        <button class="tab">Recent</button>
+        <button class="tab active">Saved</button>
+        <button class="tab">Shared</button>
+      </div>
+      <button class="create-btn" onclick="createNewPreset()">+ Create New</button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Presets Grid -->
+    <div class="presets-grid" id="presetsGrid">
+      <!-- Preset cards will be dynamically added here -->
+    </div>
+
+    <!-- Empty State (shown when no presets) -->
+    <div class="empty-state" id="emptyState" style="display: none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m11.9 12.1 4.514-4.514M20.1 2.3a1 1 0 0 0-1.4 0l-1.114 1.114A2 2 0 0 0 17 4.828v1.344a2 2 0 0 1-.586 1.414A2 2 0 0 1 17.828 7h1.344a2 2 0 0 0 1.414-.586L21.7 5.3a1 1 0 0 0 0-1.4zM6 16l2 2M8.2 9.9C8.7 8.8 9.8 8 11 8c2.8 0 5 2.2 5 5 0 1.2-.8 2.3-1.9 2.8l-.9.4A2 2 0 0 0 12 18a4 4 0 0 1-4 4c-3.3 0-6-2.7-6-6a4 4 0 0 1 4-4 2 2 0 0 0 1.8-1.2z"/>
+        <circle cx="11.5" cy="12.5" r=".5" fill="currentColor"/>
+      </svg>
+      <h2>No Presets Yet</h2>
+      <p>Create your first amp preset to get started</p>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+      <div class="search-wrapper">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input 
+          type="text" 
+          class="search-input" 
+          placeholder="Search presets or find tone for any song..."
+          id="searchInput"
+        />
+        <button class="go-btn" onclick="searchPresets()">Go</button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Sample preset data
+    const presets = [
+      { id: 1, name: 'Clean Jazz', amp: 'Fender Twin', settings: 'Gain: 2, Treble: 6' },
+      { id: 2, name: 'Heavy Metal', amp: 'Marshall JCM800', settings: 'Gain: 8, Bass: 7' },
+      { id: 3, name: 'Blues Crunch', amp: 'Vox AC30', settings: 'Gain: 5, Mid: 7' },
+      { id: 4, name: 'Rock Lead', amp: 'Mesa Boogie', settings: 'Gain: 7, Treble: 8' },
+      { id: 5, name: 'Country Twang', amp: 'Fender Deluxe', settings: 'Gain: 3, Treble: 7' },
+      { id: 6, name: 'Funk Rhythm', amp: 'Roland JC-120', settings: 'Gain: 4, Mid: 6' },
+      { id: 7, name: 'Indie Rock', amp: 'Orange Rockerverb', settings: 'Gain: 6, Bass: 6' },
+      { id: 8, name: 'Metal Djent', amp: 'Peavey 6505', settings: 'Gain: 9, Mid: 5' },
+    ];
+
+    // Render presets
+    function renderPresets(presetsToRender = presets) {
+      const grid = document.getElementById('presetsGrid');
+      const emptyState = document.getElementById('emptyState');
+      
+      if (presetsToRender.length === 0) {
+        grid.innerHTML = '';
+        emptyState.style.display = 'block';
+        return;
+      }
+      
+      emptyState.style.display = 'none';
+      
+      grid.innerHTML = presetsToRender.map(preset => `
+        <div class="preset-card" onclick="openPreset(${preset.id})">
+          <svg class="preset-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m11.9 12.1 4.514-4.514M20.1 2.3a1 1 0 0 0-1.4 0l-1.114 1.114A2 2 0 0 0 17 4.828v1.344a2 2 0 0 1-.586 1.414A2 2 0 0 1 17.828 7h1.344a2 2 0 0 0 1.414-.586L21.7 5.3a1 1 0 0 0 0-1.4zM6 16l2 2M8.2 9.9C8.7 8.8 9.8 8 11 8c2.8 0 5 2.2 5 5 0 1.2-.8 2.3-1.9 2.8l-.9.4A2 2 0 0 0 12 18a4 4 0 0 1-4 4c-3.3 0-6-2.7-6-6a4 4 0 0 1 4-4 2 2 0 0 0 1.8-1.2z"/>
+            <circle cx="11.5" cy="12.5" r=".5" fill="currentColor"/>
+          </svg>
+          <div class="preset-name">${preset.name}</div>
+          <div class="preset-details">${preset.amp}</div>
+          <div class="preset-details">${preset.settings}</div>
+        </div>
+      `).join('');
+    }
+
+    // Search functionality
+    function searchPresets() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      
+      if (!searchTerm) {
+        renderPresets(presets);
+        return;
+      }
+      
+      const filtered = presets.filter(preset => 
+        preset.name.toLowerCase().includes(searchTerm) ||
+        preset.amp.toLowerCase().includes(searchTerm) ||
+        preset.settings.toLowerCase().includes(searchTerm)
+      );
+      
+      renderPresets(filtered);
+    }
+
+    // Search on Enter key
+    document.getElementById('searchInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        searchPresets();
+      }
+    });
+
+    // Search on input (live search)
+    document.getElementById('searchInput').addEventListener('input', searchPresets);
+
+    function openPreset(id) {
+      console.log('Opening preset:', id);
+      // Add your logic to open/edit the preset
+    }
+
+    function createNewPreset() {
+      console.log('Creating new preset');
+      // Add your logic to create a new preset
+    }
+
+    // Initialize
+    renderPresets();
