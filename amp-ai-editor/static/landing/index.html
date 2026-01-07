@@ -198,7 +198,7 @@
         </p>
 
         <div class="pt-4">
-          <button onclick="window.location.href='/app'" class="bg-amber-600 hover:bg-amber-700 text-white px-12 py-6 rounded-md font-medium shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 transition-all">
+          <button onclick="handleFindToneClick()" class="bg-amber-600 hover:bg-amber-700 text-white px-12 py-6 rounded-md font-medium shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 transition-all">
             Find Your Tone
           </button>
         </div>
@@ -261,6 +261,17 @@
 
   <script>
     let currentMode = 'login';
+
+    // Handle "Find Your Tone" button click
+    function handleFindToneClick() {
+      // Check if user is already logged in
+      if (localStorage.getItem('ampai_token')) {
+        window.location.href = '/app';
+      } else {
+        // Show signup modal if not logged in
+        openAuthModal('signup');
+      }
+    }
 
     function openAuthModal(mode) {
       currentMode = mode;
@@ -383,6 +394,7 @@
       }
     });
 
+    // Check if already logged in on page load
     if (localStorage.getItem('ampai_token')) {
       window.location.href = '/app';
     }
