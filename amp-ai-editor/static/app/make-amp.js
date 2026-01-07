@@ -9,8 +9,8 @@
   const user = JSON.parse(localStorage.getItem('ampai_user') || '{}');
   
   if (!token) {
-    console.log('⚠️ No auth token found, redirecting to login...');
-    window.location.href = '/login';
+    console.log('No auth token found, redirecting to landing...');
+    window.location.href = '/';
     return;
   }
   
